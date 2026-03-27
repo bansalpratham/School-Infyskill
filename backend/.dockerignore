@@ -1,0 +1,13 @@
+**/node_modules
+**/.pnpm-store
+**/.pnp.*
+**/.yarn
+**/dist
+**/build
+**/.next
+**/.turbo
+**/.cache
+**/*.log
+.git
+.gitignore
+Dockerfile

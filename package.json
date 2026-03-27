@@ -1,0 +1,49 @@
+{
+  "name": "school-hub",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev:gateway": "pnpm build:shared && JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 PORT=4100 AUTH_SERVICE_URL=http://localhost:5001 STUDENT_SERVICE_URL=http://localhost:5002 TEACHER_SERVICE_URL=http://localhost:5003 FEES_SERVICE_URL=http://localhost:5004 EXAM_SERVICE_URL=http://localhost:5006 CLASS_SERVICE_URL=http://localhost:5007 SUBJECT_SERVICE_URL=http://localhost:5008 CUSTOM_FIELDS_SERVICE_URL=http://localhost:4020 ANNOUNCEMENTS_SERVICE_URL=http://localhost:4007 REQUESTS_SERVICE_URL=http://localhost:4008 SETTINGS_SERVICE_URL=http://localhost:4014 TEACHER_PROFILE_SERVICE_URL=http://localhost:4011 TEACHER_DIARY_SERVICE_URL=http://localhost:4015 TEACHER_ATTENDANCE_SERVICE_URL=http://localhost:4013 TEACHER_TIMETABLE_SERVICE_URL=http://localhost:4012 TEACHER_FEEDBACK_SERVICE_URL=http://localhost:4016 TEACHER_NOTIFICATIONS_SERVICE_URL=http://localhost:4017 TEACHER_MEETINGS_SERVICE_URL=http://localhost:4018 TEACHER_ACHIEVEMENTS_SERVICE_URL=http://localhost:4019 TIMETABLE_SERVICE_URL=http://localhost:5010 pnpm --filter api-gateway-ts dev",
+    "dev:auth": "PORT=5001 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter auth-service dev",
+    "dev:student": "PORT=5002 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter student-service dev",
+    "dev:teacher": "PORT=5003 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-service dev",
+    "dev:fees": "PORT=5004 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter fees-service dev",
+    "dev:exam": "PORT=5006 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter exam-service dev",
+    "dev:classes": "PORT=5007 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter class-service dev",
+    "dev:subjects": "PORT=5008 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter subject-service dev",
+    "dev:timetable": "PORT=5010 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter timetable-service dev",
+
+    "dev:custom-fields": "PORT=4020 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter custom-fields-service dev",
+
+    "dev:announcements": "PORT=4007 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter announcements-service dev",
+
+    "dev:requests": "PORT=4008 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter requests-service dev",
+
+    "dev:settings": "PORT=4014 MONGO_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 AUTH_SERVICE_URL=http://localhost:5001 pnpm --filter settings-service dev",
+
+    "dev:teacher-attendance": "PORT=4013 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-attendance-service dev",
+    "dev:teacher-diary": "PORT=4015 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-diary-service dev",
+    "dev:teacher-timetable": "PORT=4012 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-timetable-service dev",
+
+    "dev:teacher-profile": "PORT=4011 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-profile-service dev",
+    "dev:teacher-feedback": "PORT=4016 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-feedback-service dev",
+    "dev:teacher-notifications": "PORT=4017 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-notifications-service dev",
+    "dev:teacher-meetings": "PORT=4018 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-meetings-service dev",
+    "dev:teacher-achievements": "PORT=4019 MONGODB_URI=mongodb://localhost:27017/school_hub JWT_SECRET=change_me_super_secret CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:5175,http://127.0.0.1:5175 pnpm --filter teacher-achievements-service dev",
+
+    "dev:admin": "pnpm --filter admin-dashboard dev",
+    "dev:teacher-dashboard": "pnpm --filter teacher-dashboard dev",
+    "dev:student-dashboard": "pnpm --filter student-dashboard dev",
+
+    "dev": "NODE_ENV=development concurrently -n gateway,auth,student,teacher,fees,exam,classes,subjects,timetable,custom_fields,announcements,requests,settings,teacher_attendance,teacher_diary,teacher_timetable,teacher_profile,teacher_feedback,teacher_notifications,teacher_meetings,teacher_achievements,admin,teacher_ui,student_ui -c cyan,green,magenta,yellow,blue,white,gray,gray,gray,gray,gray,gray,gray,gray,gray,gray,gray,gray,gray,gray,gray,red,cyan,magenta \"pnpm dev:gateway\" \"pnpm dev:auth\" \"pnpm dev:student\" \"pnpm dev:teacher\" \"pnpm dev:fees\" \"pnpm dev:exam\" \"pnpm dev:classes\" \"pnpm dev:subjects\" \"pnpm dev:timetable\" \"pnpm dev:custom-fields\" \"pnpm dev:announcements\" \"pnpm dev:requests\" \"pnpm dev:settings\" \"pnpm dev:teacher-attendance\" \"pnpm dev:teacher-diary\" \"pnpm dev:teacher-timetable\" \"pnpm dev:teacher-profile\" \"pnpm dev:teacher-feedback\" \"pnpm dev:teacher-notifications\" \"pnpm dev:teacher-meetings\" \"pnpm dev:teacher-achievements\" \"pnpm dev:admin\" \"pnpm dev:teacher-dashboard\" \"pnpm dev:student-dashboard\"",
+
+    "build:gateway": "pnpm --filter api-gateway-ts build",
+    "build:shared": "pnpm --filter @school-hub/shared-types build && pnpm --filter @school-hub/shared-utils build && pnpm --filter @school-hub/shared-middleware build",
+    "lint": "echo \"Add lint later\"",
+    "typecheck": "pnpm build:shared && pnpm build:gateway"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.3"
+  }
+}

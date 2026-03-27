@@ -1,0 +1,21 @@
+{
+  "name": "@school-hub/shared-middleware",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "commonjs",
+  "dependencies": {
+    "@school-hub/shared-types": "workspace:*",
+    "@school-hub/shared-utils": "workspace:*",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  }
+}

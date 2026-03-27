@@ -1,0 +1,432 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: school-hub-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: api-gateway
+    container_name: school-hub-api-gateway
+    restart: unless-stopped
+    depends_on:
+      - auth-service
+      - student-service
+      - teacher-service
+      - fees-service
+      - payments-service
+      - exam-service
+      - announcements-service
+      - requests-service
+      - import-export-service
+      - dashboard-service
+      - settings-service
+      - teacher-profile-service
+      - teacher-timetable-service
+      - teacher-attendance-service
+      - teacher-diary-service
+      - teacher-feedback-service
+      - teacher-notifications-service
+      - teacher-meetings-service
+      - teacher-achievements-service
+    environment:
+      PORT: 4000
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+      AUTH_SERVICE_URL: http://auth-service:5000
+      STUDENT_SERVICE_URL: http://student-service:4002
+      TEACHER_SERVICE_URL: http://teacher-service:4003
+      FEES_SERVICE_URL: http://fees-service:4004
+      PAYMENTS_SERVICE_URL: http://payments-service:4005
+      EXAM_SERVICE_URL: http://exam-service:4006
+      ANNOUNCEMENTS_SERVICE_URL: http://announcements-service:4007
+      REQUESTS_SERVICE_URL: http://requests-service:4008
+      IMPORT_EXPORT_SERVICE_URL: http://import-export-service:4009
+      DASHBOARD_SERVICE_URL: http://dashboard-service:4010
+      SETTINGS_SERVICE_URL: http://settings-service:4014
+      TEACHER_PROFILE_SERVICE_URL: http://teacher-profile-service:4011
+      TEACHER_TIMETABLE_SERVICE_URL: http://teacher-timetable-service:4012
+      TEACHER_ATTENDANCE_SERVICE_URL: http://teacher-attendance-service:4013
+      TEACHER_DIARY_SERVICE_URL: http://teacher-diary-service:4015
+      TEACHER_FEEDBACK_SERVICE_URL: http://teacher-feedback-service:4016
+      TEACHER_NOTIFICATIONS_SERVICE_URL: http://teacher-notifications-service:4017
+      TEACHER_MEETINGS_SERVICE_URL: http://teacher-meetings-service:4018
+      TEACHER_ACHIEVEMENTS_SERVICE_URL: http://teacher-achievements-service:4019
+    ports:
+      - "4000:4000"
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: auth-service
+    container_name: school-hub-auth-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 5000
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "5000:5000"
+
+  student-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: student-service
+    container_name: school-hub-student-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4002
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4002:4002"
+
+  teacher-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-service
+    container_name: school-hub-teacher-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4003
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4003:4003"
+
+  fees-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: fees-service
+    container_name: school-hub-fees-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4004
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4004:4004"
+
+  payments-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: payments-service
+    container_name: school-hub-payments-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4005
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4005:4005"
+
+  exam-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: exam-service
+    container_name: school-hub-exam-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4006
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4006:4006"
+
+  announcements-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: announcements-service
+    container_name: school-hub-announcements-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4007
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4007:4007"
+
+  requests-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: requests-service
+    container_name: school-hub-requests-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4008
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4008:4008"
+
+  import-export-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: import-export-service
+    container_name: school-hub-import-export-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4009
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "*"
+    ports:
+      - "4009:4009"
+
+  dashboard-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: dashboard-service
+    container_name: school-hub-dashboard-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4010
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+      STUDENT_SERVICE_URL: http://student-service:4002
+      TEACHER_SERVICE_URL: http://teacher-service:4003
+      FEES_SERVICE_URL: http://fees-service:4004
+      PAYMENTS_SERVICE_URL: http://payments-service:4005
+    ports:
+      - "4010:4010"
+
+  teacher-profile-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-profile-service
+    container_name: school-hub-teacher-profile-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4011
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4011:4011"
+
+  teacher-timetable-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-timetable-service
+    container_name: school-hub-teacher-timetable-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+      - student-service
+    environment:
+      PORT: 4012
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+      STUDENT_SERVICE_URL: http://student-service:4002
+    ports:
+      - "4012:4012"
+
+  teacher-attendance-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-attendance-service
+    container_name: school-hub-teacher-attendance-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4013
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4013:4013"
+
+  settings-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: settings-service
+    container_name: school-hub-settings-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4014
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4014:4014"
+
+  teacher-diary-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-diary-service
+    container_name: school-hub-teacher-diary-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+      - student-service
+    environment:
+      PORT: 4015
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+      STUDENT_SERVICE_URL: http://student-service:4002
+    ports:
+      - "4015:4015"
+
+  teacher-feedback-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-feedback-service
+    container_name: school-hub-teacher-feedback-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4016
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4016:4016"
+
+  teacher-notifications-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-notifications-service
+    container_name: school-hub-teacher-notifications-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4017
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4017:4017"
+
+  teacher-meetings-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-meetings-service
+    container_name: school-hub-teacher-meetings-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4018
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4018:4018"
+
+  teacher-achievements-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_DIR: teacher-achievements-service
+    container_name: school-hub-teacher-achievements-service
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 4019
+      MONGODB_URI: mongodb://mongo:27017/school_hub
+      JWT_SECRET: change_me_super_secret
+      AUTH_DISABLED: "false"
+      CORS_ORIGIN: "http://localhost:5173,http://127.0.0.1:5173"
+    ports:
+      - "4019:4019"
+
+volumes:
+  mongo_data:

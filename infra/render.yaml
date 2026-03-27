@@ -1,0 +1,553 @@
+services:
+  - type: web
+    name: school-hub-gateway
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -r install --frozen-lockfile --prod=false && pnpm -w build:shared && pnpm -w --filter api-gateway-ts build
+    startCommand: pnpm -w --filter api-gateway-ts start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: TENANCY_DISABLED
+        value: "false"
+      - key: CORS_ORIGIN
+        sync: false
+      - key: AUTH_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-auth
+          property: hostport
+      - key: STUDENT_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-student
+          property: hostport
+      - key: TEACHER_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher
+          property: hostport
+      - key: FEES_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-fees
+          property: hostport
+      - key: EXAM_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-exam
+          property: hostport
+      - key: CLASS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-class
+          property: hostport
+      - key: SUBJECT_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-subject
+          property: hostport
+      - key: CUSTOM_FIELDS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-custom-fields
+          property: hostport
+      - key: ANNOUNCEMENTS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-announcements
+          property: hostport
+      - key: REQUESTS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-requests
+          property: hostport
+      - key: IMPORT_EXPORT_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-import-export
+          property: hostport
+      - key: DASHBOARD_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-dashboard
+          property: hostport
+      - key: SETTINGS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-settings
+          property: hostport
+      - key: PAYMENTS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-payments
+          property: hostport
+      - key: TEACHER_PROFILE_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-profile
+          property: hostport
+      - key: TEACHER_DIARY_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-diary
+          property: hostport
+      - key: TEACHER_ATTENDANCE_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-attendance
+          property: hostport
+      - key: TEACHER_TIMETABLE_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-timetable
+          property: hostport
+      - key: TEACHER_FEEDBACK_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-feedback
+          property: hostport
+      - key: TEACHER_NOTIFICATIONS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-notifications
+          property: hostport
+      - key: TEACHER_MEETINGS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-meetings
+          property: hostport
+      - key: TEACHER_ACHIEVEMENTS_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-teacher-achievements
+          property: hostport
+      - key: TIMETABLE_SERVICE_URL
+        fromService:
+          type: web
+          name: school-hub-timetable
+          property: hostport
+
+  - type: web
+    name: school-hub-auth
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/auth-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/auth-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5001"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-student
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/student-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/student-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5002"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5003"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-fees
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/fees-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/fees-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5004"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-exam
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/exam-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/exam-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5006"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-class
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/class-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/class-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5007"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-subject
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/subject-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/subject-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5008"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-profile
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-profile-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-profile-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4011"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-timetable
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -w install --frozen-lockfile --prod=false && pnpm -w --filter timetable-service build
+    startCommand: pnpm -w --filter timetable-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5010"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-custom-fields
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/custom-fields-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/custom-fields-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4020"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-announcements
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/announcements-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/announcements-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4007"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-requests
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/requests-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/requests-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4008"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-import-export
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/import-export-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/import-export-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4009"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-dashboard
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/dashboard-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/dashboard-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4010"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-settings
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/settings-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/settings-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4014"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-payments
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/payments-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/payments-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4005"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-attendance
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-attendance-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-attendance-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4013"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-diary
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-diary-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-diary-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4015"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-feedback
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-feedback-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-feedback-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4016"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-notifications
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-notifications-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-notifications-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4017"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-meetings
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-meetings-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-meetings-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4018"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-achievements
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-achievements-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-achievements-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4019"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-timetable
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: pnpm -C backend/teacher-timetable-service install --frozen-lockfile --prod=false
+    startCommand: pnpm -C backend/teacher-timetable-service start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4012"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: school-hub-admin
+    runtime: static
+    rootDir: .
+    buildCommand: pnpm -w install --frozen-lockfile --prod=false && pnpm -w --filter admin-dashboard build
+    staticPublishPath: admin-dashboard/dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
+  - type: web
+    name: school-hub-teacher-ui
+    runtime: static
+    rootDir: .
+    buildCommand: pnpm -w install --frozen-lockfile --prod=false && pnpm -w --filter teacher-dashboard build
+    staticPublishPath: teacher-dashboard/dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
+  - type: web
+    name: school-hub-student-ui
+    runtime: static
+    rootDir: .
+    buildCommand: pnpm -w install --frozen-lockfile --prod=false && pnpm -w --filter student-dashboard build
+    staticPublishPath: student-dashboard/dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false

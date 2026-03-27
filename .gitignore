@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Build outputs
+/dist
+/build
+/out
+/.next
+/.nuxt
+/.output
+/.vercel
+/.netlify
+
+# Vite
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.eslintcache
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Misc
+*.tgz
+*.bak
+
+# MongoDB local
+/data/
+
+# Local sqlite/db files
+*.sqlite
+*.sqlite3
+
+# Supabase
+.supabase/

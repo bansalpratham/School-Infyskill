@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@school-hub/shared-types": ["packages/shared-types/dist"],
+      "@school-hub/shared-utils": ["packages/shared-utils/dist"],
+      "@school-hub/shared-middleware": ["packages/shared-middleware/dist"]
+    },
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist"
+  }
+}
